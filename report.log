@@ -1,46 +1,46 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.13)  24 FEB 2025 16:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.20)  24 FEB 2025 17:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/gaute/Documents/TMA4212 NumDiff/NumDiff_1/report.tex"
-(c:/Users/gaute/Documents/TMA4212 NumDiff/NumDiff_1/report.tex
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
-(c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
-(c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+**"c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex"
+(c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/base\size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count196
-\c@section=\count197
-\c@subsection=\count198
-\c@subsubsection=\count199
-\c@paragraph=\count266
-\c@subparagraph=\count267
-\c@figure=\count268
-\c@table=\count269
-\abovecaptionskip=\skip49
-\belowcaptionskip=\skip50
-\bibindent=\dimen141
-) (c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amscls/amsthm.sty
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/amscls\amsthm.sty
 Package: amsthm 2020/05/29 v2.20.6
 \thm@style=\toks17
 \thm@bodyfont=\toks18
 \thm@headfont=\toks19
 \thm@notefont=\toks20
 \thm@headpunct=\toks21
-\thm@preskip=\skip51
-\thm@postskip=\skip52
-\thm@headsep=\skip53
+\thm@preskip=\skip50
+\thm@postskip=\skip51
+\thm@headsep=\skip52
 \dth@everypar=\toks22
 )
-\c@thm=\count270
- (c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count271
-\l__pdf_internal_box=\box52
-) (./report.aux)
+\c@thm=\count195
+ (C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count196
+\l__pdf_internal_box=\box51
+) (report.aux)
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
@@ -63,34 +63,31 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 9.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 9.
- (./sections/introduction.tex) (./sections/theory.tex
+ (sections/introduction.tex) (sections/theory.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 4.
-)
+) [1
 
-[1
-
-{c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./report.aux)
+{C:/Users/einar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (report.aux)
  ***********
-LaTeX2e <2024-11-01> patch level 2
-L3 programming layer <2025-01-18>
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 601 strings out of 475171
- 10867 string characters out of 5764309
- 394164 words of memory out of 5000000
- 23656 multiletter control sequences out of 15000+600000
- 563131 words of font info for 50 fonts, out of 8000000 for 9000
- 14 hyphenation exceptions out of 8191
- 35i,6n,50p,201b,197s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/gaute/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (1 page, 99919 bytes).
+ 602 strings out of 474486
+ 11376 string characters out of 5743755
+ 1930542 words of memory out of 5000000
+ 22943 multiletter control sequences out of 15000+600000
+ 562363 words of font info for 50 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 35i,6n,50p,478b,197s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmti10.pfb>
+Output written on report.pdf (1 page, 111297 bytes).
 PDF statistics:
- 53 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
