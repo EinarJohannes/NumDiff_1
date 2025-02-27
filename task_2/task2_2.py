@@ -97,7 +97,24 @@ def animate_SIR(M, t, Sm, Im, Rm, suptitle="", FPS=10):
     
     ani = animation.FuncAnimation(fig, update, frames=len(t), interval=1000/FPS)
     plt.show()
+    
+# Example usage
+M = 30
+S0 = np.ones((M, M)) * 0.99  # 99% susceptible
+I0 = np.zeros((M, M))
+I0[2, 2] = 0.1  # Øk initial infeksjon
+I0[15, 15] = 0.1  # Legg til en annen infeksjon
 
+tspan = (0.0, 5.0)
+beta = 3
+gamma = 1
+mu_I = 0.01
+mu_S = 0.01
+
+t, Sm, Im, Rm = SIR_2D(M, S0, I0, tspan, beta, gamma, mu_I, mu_S)
+animate_SIR(M, t, Sm, Im, Rm, "SIR-model")
+
+"""
 # Example usage
 M = 30
 S0 = np.ones((M, M)) * 0.99  # 99% susceptible
@@ -112,3 +129,4 @@ mu_S = 0.01
 
 t, Sm, Im, Rm = SIR_2D(M, S0, I0, tspan, beta, gamma, mu_I, mu_S)
 animate_SIR(M, t, Sm, Im, Rm, "SIR-model")
+"""
