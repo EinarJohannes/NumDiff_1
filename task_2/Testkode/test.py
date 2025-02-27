@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 # Parameters
 beta = 0.8
@@ -27,12 +28,14 @@ def laplacian(U):
 # Storage for results
 S_solution = np.zeros((Nt, Nx, Ny))
 I_solution = np.zeros((Nt, Nx, Ny))
+R_solution = np.zeros((Nt, Nx, Ny))
 
 # Time-stepping loop
 for t in range(Nt):
     # Store the current state
     S_solution[t, :, :] = S
     I_solution[t, :, :] = I
+    R_solution[t, :, :] = 1 - S - I  # Ensure S + I + R = 1
     
     # Compute the Laplacian
     lap_S = laplacian(S)
@@ -42,44 +45,35 @@ for t in range(Nt):
     S += dt * (-beta * I * S + mu_S * lap_S)
     I += dt * (beta * I * S - gamma * I + mu_I * lap_I)
 
-"""
-# Visualization of results at the final time point
-plt.imshow(S_solution[-1, :, :], cmap='Blues', interpolation='nearest')
-plt.colorbar(label='Susceptible Population')
-plt.title('Susceptible Population at Final Time')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.show()
-
-plt.imshow(I_solution[-1, :, :], cmap='Reds', interpolation='nearest')
-plt.colorbar(label='Infected Population')
-plt.title('Infected Population at Final Time')
-plt.xlabel('x')
-plt.ylabel('y')
-plt.show()
-"""
-
-#Print shape of solutions:
+# Print shape of solutions:
 print(S_solution.shape)
 print(I_solution.shape)
+print(R_solution.shape)
 
-#Visualising infected over time by animation. Color plot or such that changes over time.
-#Animation of infected over time
-import matplotlib.animation as animation
+# Animation of infected, susceptible, and recovered over time
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
 
-# Animation of infected over time
-fig, ax = plt.subplots()
-cax = ax.imshow(I_solution[0, :, :], cmap='Reds', interpolation='nearest')
-fig.colorbar(cax, label='Infected Population')
+cax_S = axes[0].imshow(S_solution[0, :, :], cmap='Blues', interpolation='nearest')
+fig.colorbar(cax_S, ax=axes[0], label='Susceptible Population')
+axes[0].set_title('Susceptible Population')
+
+cax_I = axes[1].imshow(I_solution[0, :, :], cmap='Reds', interpolation='nearest')
+fig.colorbar(cax_I, ax=axes[1], label='Infected Population')
+axes[1].set_title('Infected Population')
+
+cax_R = axes[2].imshow(R_solution[0, :, :], cmap='Greens', interpolation='nearest')
+fig.colorbar(cax_R, ax=axes[2], label='Recovered Population')
+axes[2].set_title('Recovered Population')
 
 def update(frame):
-    cax.set_array(I_solution[frame, :, :])
-    ax.set_title(f'Infected Population at Time {frame*dt:.2f}')
-    return cax,
+    cax_S.set_array(S_solution[frame, :, :])
+    cax_I.set_array(I_solution[frame, :, :])
+    cax_R.set_array(R_solution[frame, :, :])
+    axes[0].set_title(f'Susceptible Population at Time {frame*dt:.2f}')
+    axes[1].set_title(f'Infected Population at Time {frame*dt:.2f}')
+    axes[2].set_title(f'Recovered Population at Time {frame*dt:.2f}')
+    return cax_S, cax_I, cax_R
 
 ani = animation.FuncAnimation(fig, update, frames=Nt, interval=300, blit=True)
 
 plt.show()
-
-
-
