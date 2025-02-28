@@ -4,7 +4,7 @@ import matplotlib.animation as animation
 
 # Parameters
 beta = 0.8
-gamma = 0.1
+gamma = 0.01
 mu_S = 0.3
 mu_I = 0.3
 Lx, Ly = 1.0, 1.0
@@ -77,3 +77,6 @@ def update(frame):
 ani = animation.FuncAnimation(fig, update, frames=Nt, interval=300, blit=True)
 
 plt.show()
+
+#CHecking for largest value of integer in S_solution
+print(np.max(S_solution))
