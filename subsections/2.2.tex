@@ -1,2 +1,12 @@
 \subsection{A mathematical model of the problem}
-Mathematically, the si
+Assume first that we only consider the amount of infected
+peaple at some location in space, and want to investigate
+how the disease affects a number of people at this location.
+The SIR-model that only depends on time would then look like
+this:
+
+\begin{align}
+  \frac{dS}{dt} &= -\beta SI, \label{eq:SIR1} \\
+  \frac{dI}{dt} &= \beta SI - \gamma I, \label{eq:SIR2} \\
+  \frac{dR}{dt} &= \gamma I. \label{eq:SIR3}
+\end{align}
