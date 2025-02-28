@@ -1,0 +1,88 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.2.20)  28 FEB 2025 16:36
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex"
+(c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+(C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/base\article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
+(C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/base\size10.clo
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count187
+\c@section=\count188
+\c@subsection=\count189
+\c@subsubsection=\count190
+\c@paragraph=\count191
+\c@subparagraph=\count192
+\c@figure=\count193
+\c@table=\count194
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
+\bibindent=\dimen140
+) (C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/amscls\amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks17
+\thm@bodyfont=\toks18
+\thm@headfont=\toks19
+\thm@notefont=\toks20
+\thm@headpunct=\toks21
+\thm@preskip=\skip50
+\thm@postskip=\skip51
+\thm@headsep=\skip52
+\dth@everypar=\toks22
+)
+\c@thm=\count195
+ (C:\Users\einar\OneDrive\Skrivebord\downloads\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count196
+\l__pdf_internal_box=\box51
+) (report.aux)
+\openout1 = `report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 9.
+ (sections/task_1.tex) (sections/task_2.tex (subsections/2.1.tex) (subsections/2.2.tex)) [1
+
+{C:/Users/einar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (report.aux)
+ ***********
+LaTeX2e <2023-11-01> patch level 1
+L3 programming layer <2024-01-04>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 604 strings out of 474486
+ 11592 string characters out of 5743755
+ 1927542 words of memory out of 5000000
+ 22939 multiletter control sequences out of 15000+600000
+ 562016 words of font info for 49 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 35i,6n,50p,233b,197s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on report.pdf (1 page, 56967 bytes).
+PDF statistics:
+ 26 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
