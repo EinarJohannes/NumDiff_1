@@ -1,2 +1,2 @@
 for å løse oppgave 1, finn et uttrykk for u* i det nederste,
- og sett det inn i det øverste, for å bare få ett uttrykk
+og sett det inn i det øverste, for å bare få ett uttrykk
