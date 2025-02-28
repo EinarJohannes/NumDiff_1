@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1740756970.82587 "c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex" "report.pdf" "report" 1740756971.8043 0
+["pdflatex"] 1740757149.28699 "c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex" "report.pdf" "report" 1740757150.11758 0
   "C:/Users/einar/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1740138441 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/einar/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1740049333 24225046 4bb43facef80bc4c523ae950015c0e7b ""
   "C:/Users/einar/OneDrive/Skrivebord/downloads/fonts/tfm/public/cm/cmbx12.tfm" 1136765053 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -22,12 +22,12 @@
   "C:/Users/einar/OneDrive/Skrivebord/downloads/tex/latex/base/size10.clo" 1705273578 8448 dbc0dbf4156c0bb9ba01a1c685d3bad0 ""
   "C:/Users/einar/OneDrive/Skrivebord/downloads/tex/latex/l3backend/l3backend-pdftex.def" 1704400941 30006 57b07afb710ee2f649c65cfbafda39c1 ""
   "c:/Users/einar/OneDrive - NTNU/Vår 2025/Num-Diff/projects/NumDiff_1/report.tex" 1740756010 272 f4ce767fc0d5d95508156ab1d6e41c87 ""
-  "report.aux" 1740756971 468 1701761822eadaa129a751b6617961f6 "pdflatex"
+  "report.aux" 1740757149 468 1701761822eadaa129a751b6617961f6 "pdflatex"
   "report.tex" 1740756010 272 f4ce767fc0d5d95508156ab1d6e41c87 ""
-  "sections/task_1.tex" 1740756969 20 d1ff8ea6edf5caac9da140cf2e484712 ""
+  "sections/task_1.tex" 1740757127 20 d1ff8ea6edf5caac9da140cf2e484712 ""
   "sections/task_2.tex" 1740756630 76 d321557f32deed4a34de69e708d32ba5 ""
   "subsections/2.1.tex" 1740756540 761 3d858027464591bb775fb6317cf41832 ""
-  "subsections/2.2.tex" 1740756955 48 6dc83bf1ad9e46a60a00e34246f70ac0 ""
+  "subsections/2.2.tex" 1740757148 72 9415258ee0df42297b38817dc28be470 ""
   (generated)
   "report.aux"
   "report.log"

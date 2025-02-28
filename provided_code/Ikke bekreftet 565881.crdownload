@@ -1,0 +1,442 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Numerical solution of the 2d Poisson equation \n",
+    "\n",
+    "Numerical solution of the 2d Poisson equation on the rectangle $[0,1]\\times [0,1]$:\n",
+    "\n",
+    "\\begin{align*}\n",
+    "  \\Delta u  &= f, \\qquad x\\in[0,1],y\\in[0,1]  \\\\\n",
+    "  u|_{\\partial \\Omega}&=g(x,y)\n",
+    "\\end{align*}\n",
+    "\n",
+    "\n",
+    "Finite difference approximation (5 point formula):\n",
+    "\n",
+    "\\begin{align*}\n",
+    "    U_{i+1,j}+U_{i-1,j}+U_{i,j+1}+U_{i,j-1}-4U_{i,j}=h^2f_{i,j}\n",
+    "\\end{align*}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "* Import the necessary libraries for computations and plotting"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "%matplotlib inline\n",
+    "import numpy as np\n",
+    "import scipy.sparse as sparse             # Sparse matrices\n",
+    "from scipy.sparse.linalg import spsolve   # Linear solver for sparse matrices\n",
+    "import matplotlib.pyplot as plt\n",
+    "import pandas as pd  \n",
+    "newparams = {'figure.figsize': (10.0, 5.0), 'axes.grid': True,\n",
+    "             'lines.markersize': 8, 'lines.linewidth': 2,\n",
+    "             'font.size': 12}\n",
+    "plt.rcParams.update(newparams)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def plot_surface(x,y,U):\n",
+    "    '''\n",
+    "    Plot surfaces \n",
+    "    '''\n",
+    "    plt.figure()\n",
+    "    ax = plt.axes(projection='3d')\n",
+    "    ax.plot_surface(x, y, U)\n",
+    "    plt.xlabel('x')\n",
+    "    plt.ylabel('y')\n",
+    "    plt.show()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def laplacian(M):\n",
+    "    '''\n",
+    "    Construct the Discrete Laplacian\n",
+    "    '''\n",
+    "    Mi = M-1       # Number of inner points in each direction\n",
+    "    Mi2 = Mi**2    # Number of inner points in total\n",
+    "\n",
+    "    # Construct a sparse A-matrix\n",
+    "    B = sparse.diags([1,-4,1],[-1,0,1],shape=(Mi, Mi), format=\"lil\")\n",
+    "    A = sparse.kron(sparse.eye(Mi), B)\n",
+    "    C = sparse.diags([1,1],[-Mi,Mi],shape=(Mi2, Mi2), format=\"lil\")\n",
+    "    A = (A+C).tocsr() # Konverter til csr-format (necessary for spsolve) \n",
+    "    return A"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "A = laplacian(4)\n",
+    "print(A.toarray())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Construct a class for the problem, the solver included"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class Poisson(object):\n",
+    "    '''\n",
+    "    Class for the Poisson problem Delta u = f on Omega, with u=g at the boundaries. \n",
+    "    '''\n",
+    "    def __init__(self, f, g=0):\n",
+    "        self.f = f   # Right hand side\n",
+    "        self.g = g   # Boundary values\n",
+    "\n",
+    "    def solve(self, M=10):\n",
+    "        '''\n",
+    "        Solve Poisson problem with the 5-point formula\n",
+    "        M: Number of grid intervals in each direction\n",
+    "        '''\n",
+    "\n",
+    "        # Make the grid\n",
+    "        x = np.linspace(0, 1, M+1)\n",
+    "        y = np.linspace(0, 1, M+1) \n",
+    "        h = 1/M\n",
+    "\n",
+    "        # Inner points\n",
+    "        xi = x[1:-1]       \n",
+    "        yi = y[1:-1] \n",
+    "        Xi, Yi = np.meshgrid(xi, yi)\n",
+    "        Mi = M-1          # Number of inner points in each direction\n",
+    "\n",
+    "        A = laplacian(M)\n",
+    "        \n",
+    "        # Construct the right hand side directly on the grid \n",
+    "        # To be consistent with the natural choice of axes, U[j,i] \\approx u(x_i,y_j). \n",
+    "        \n",
+    "        b = np.zeros((Mi,Mi))\n",
+    "        b[0,0:Mi]    -= self.g(xi,0.)       # lower boundary\n",
+    "        b[Mi-1,0:Mi] -= self.g(xi,1.)       # upper boundary\n",
+    "        b[0:Mi,0]    -= self.g(0.,yi)       # left  boundary\n",
+    "        b[0:Mi,Mi-1] -= self.g(1.,yi)       # right boundary\n",
+    "        b += h**2*self.f(Xi,Yi)         \n",
+    "        b = b.flatten() \n",
+    "        \n",
+    "\n",
+    "        # Solve the linear system (sparse solver)\n",
+    "        Ui = spsolve(A,b)\n",
+    "\n",
+    "        # Include the boundary values\n",
+    "        U = np.zeros((M+1,M+1))\n",
+    "        U[0,0:M+1] = self.g(x,0.)\n",
+    "        U[M,0:M+1] = self.g(x,1.)\n",
+    "        U[0:M+1,0] = self.g(0.,y)\n",
+    "        U[0:M+1,M] = self.g(1.,y)\n",
+    "        U[1:-1,1:-1] = Ui.reshape(M-1,M-1)\n",
+    "\n",
+    "        X, Y = np.meshgrid(x,y)\n",
+    "        return X, Y, U"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Test the code. \n",
+    "\n",
+    "Try the code on a problem for which the code will produce the exact answer, e.g. when $u$ is a polynonomial of degree 3 or less. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "f = lambda x,y : 0\n",
+    "g = lambda x,y : x\n",
+    "pde = Poisson(f, g)\n",
+    "x, y, U = pde.solve(4);\n",
+    "plot_surface(x, y, U)\n",
+    "print(f'Error: {np.max(np.abs(g(x,y)-U))}') \n",
+    "print(U)\n",
+    "print(g(x,y))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Test of accuracy\n",
+    "* Make a test example.\n",
+    "* Here we force the exact solution to be $u=x^2\\cos(5y)$\n",
+    "* We compute the corresponding $f$: \n",
+    "\\begin{align}\n",
+    " f(x)&=\\partial_x^2 u + \\partial_y^2 u\\\\\n",
+    " &=2\\cos(5y)-25x^2\\cos(5y)\n",
+    "\\end{align}"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Exact solution\n",
+    "def u(x,y):\n",
+    "    return x**2*np.cos(5*y)\n",
+    "\n",
+    "# Forcing function\n",
+    "def f(x,y):\n",
+    "    return 2*np.cos(5*y)-25*x**2*np.cos(5*y)\n",
+    "\n",
+    "# Boundary conditions\n",
+    "def g(x,y):\n",
+    "    return u(x,y)\n",
+    "\n",
+    "ex1 = Poisson(f, g)  "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "* Solve it. \n",
+    "* Plot the solution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "M = 100\n",
+    "# Solution of the problem\n",
+    "x, y, U = ex1.solve(M)\n",
+    "\n",
+    "# Plot of the solution\n",
+    "plot_surface(x, y, U)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "* Plot the error"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "err = g(x,y) - U\n",
+    "# plot of the error\n",
+    "plot_surface(x, y, np.abs(err))\n",
+    "print(f'Max error: {np.max(np.abs(err)):.2e}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "* Verify the convergence result by successively refining the grid. \n",
+    "* We measure convergence in the max / $L^\\infty$-norm"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Function operating a convergence study\n",
+    "def convergence(pde, u_exact): \n",
+    "    P = 4\n",
+    "    Hconv = np.zeros(P)\n",
+    "    Emax = np.zeros(P)\n",
+    "    M = 5\n",
+    "    for p in range(P):\n",
+    "        x, y, U = pde.solve(M)\n",
+    "        Emax[p] = np.max(np.abs(u_exact(x,y)-U))\n",
+    "        Hconv[p] = 1./M\n",
+    "        M = 2*M\n",
+    "    orderMax = np.polyfit(np.log(Hconv),np.log(Emax),1)[0]\n",
+    "    return Hconv, Emax, orderMax"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Plot of the convergence plot\n",
+    "H, EM, pM = convergence(ex1, u)\n",
+    "Rate=np.zeros(np.size(EM))\n",
+    "Rate[1:]=np.log10(EM[1:]/EM[:-1])/np.log10(H[1:]/H[:-1])\n",
+    "pd.options.display.float_format = '{:.5f}'.format\n",
+    "df = pd.DataFrame(data={'h': H, 'Error': EM ,'Rate':Rate}) \n",
+    "df\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.figure()\n",
+    "plt.loglog(H,EM,'o-', label='p={:.2f} in max norm'.format(pM))\n",
+    "plt.grid('on')\n",
+    "plt.xlabel('h')\n",
+    "plt.ylabel('error')\n",
+    "plt.legend();"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## The advantage of using sparse matrices\n",
+    "\n",
+    "Demonstrate this with the following example: \n",
+    "\n",
+    "Choose $M=100$ (less if you have a slow computer and not much memory).\n",
+    "\n",
+    "Run the code below. A full matrix is constructed from the sparse. \n",
+    "The linear system is then solved by a full and a sparse solver, and the memory and cpu-time used measured for both. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import time,sys\n",
+    "# Fullt system\n",
+    "\n",
+    "M = 50\n",
+    "A = laplacian(M)            # A sparse matrix\n",
+    "b = np.random.rand((M-1)**2)\n",
+    "\n",
+    "Af = A.toarray()            # Convert to a full matrix\n",
+    "print('Memory use of the full   matrix: {:d}'.format(Af.data.nbytes))\n",
+    "print('Memory use of the sparse matrix: {:d}'.format(A.data.nbytes))\n",
+    "print('Factor: {:.2e}'.format(Af.data.nbytes/A.data.nbytes))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "start = time.time()\n",
+    "U = np.linalg.solve(Af, b)            # Solve the system with a full solver\n",
+    "ferdig = time.time()\n",
+    "time_full = ferdig - start\n",
+    "print('Time used for a full solver:', time_full)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# sparse system\n",
+    "start = time.time()\n",
+    "U = spsolve(A, b)            # Solve the system with a sparse solver\n",
+    "ferdig = time.time()\n",
+    "time_sparse = ferdig - start\n",
+    "print('Time used for a sparse solver:', time_sparse)\n",
+    "print('Factor: {:.2e}'.format(time_full/time_sparse))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.1"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
